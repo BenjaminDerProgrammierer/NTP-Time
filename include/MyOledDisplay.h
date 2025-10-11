@@ -12,6 +12,7 @@
 #include "MyLogos.h"
 #include "MyWifi.h"
 #include "MyTime.h"
+#include "MySensor.h"
 
 #ifndef _MY_OLED_DISPLAY_H
 #define _MY_OLED_DISPLAY_H
@@ -94,7 +95,7 @@ void displayWiFiInfo() {
     display.println("WiFi Info:");
     display.println("----------");
     display.print("SSID: ");
-    display.println(MY_WIFI_SSID);
+    display.println(WiFi.SSID());
     display.print("IP: ");
     display.println(WiFi.localIP().toString().c_str());
   }
@@ -119,4 +120,38 @@ void displayTime() {
   display.display();
 }
 
-#endif  // _MY_OLED_DISPLAY_H
+/**
+ * Display BME280 sensor values on the OLED display.
+ */
+void displaySensorValues(Adafruit_BME280 &bme) {
+  display.clearDisplay();
+
+  display.setTextSize(1);      // Normal 1:1 pixel scale
+  display.setTextColor(SH110X_WHITE); // Draw white text
+  display.setCursor(0, 0);     // Start at top-left corner
+
+  display.println("Sensor Values:");
+  display.println("--------------");
+
+  display.print("Temp: ");
+  display.print(bme.readTemperature());
+  display.print(' ');
+  display.print((char)247); // degree symbol 
+  display.println('C');
+
+  display.print("Pres: ");
+  display.print(bme.readPressure() / 100.0F);
+  display.println(" hPa");
+
+  display.print("Hum:  ");
+  display.print(bme.readHumidity());
+  display.println(" %");
+
+  display.print("Alt:  ");
+  display.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
+  display.println(" m");
+
+  display.display();
+}
+
+#endif  // _MY_OLED_DISPLAY_H_

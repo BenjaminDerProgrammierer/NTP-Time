@@ -6,14 +6,26 @@
 |------|-------------|-------------|
 | [D1 Mini NodeMcu mit ESP8266-12F WLAN Modul](https://www.az-delivery.de/products/d1-mini) | ESP8266 based microcontroller | 7€ |
 | [1,3 Zoll OLED I2C 128 x 64 Pixel Display](https://www.az-delivery.de/products/1-3zoll-i2c-oled-display) | OLED Display | 9€ |
+| [GY-BME280 Sensor](https://www.az-delivery.de/products/gy-bme280) | Temperature, Humidity and Pressure Sensor | 11€ |
 
 Additionally you will need a Breadboard and some jumper wires.
 
 ## Wiring
 
+### OLED Display to D1 Mini
+
 | OLED Pin | D1 Mini Pin |
-|----------|--------------|
-| GND      | G            |
-| VCC      | 3V3          |
-| SCL      | D1           |
-| SDA      | D2           |
+|----------|-------------|
+| GND      | G           |
+| VCC      | 3V3         |
+| SCL      | D1          |
+| SDA      | D2          |
+
+### BME280 to D1 Mini
+
+| BME280 Pin | D1 Mini Pin |
+|------------|-------------|
+| GND        | G           |
+| VCC        | 3V3         |
+| SCL        | D1          |
+| SDA        | D2          |
