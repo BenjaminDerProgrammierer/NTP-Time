@@ -3,6 +3,9 @@
  * Benjamin Hartmann | 10/2025
  */
 
+#ifndef _MY_OLED_DISPLAY_H_
+#define _MY_OLED_DISPLAY_H_
+
 #include <Arduino.h>
 #include <Wire.h>
 #include <SPI.h>
@@ -10,16 +13,6 @@
 #include <Adafruit_GFX.h>
 
 #include "MyLogos.h"
-#include "MyWifi.h"
-#include "MyTime.h"
-#include "MySensor.h"
-
-#ifndef _MY_OLED_DISPLAY_H
-#define _MY_OLED_DISPLAY_H
-
-// Possible Libraries:
-// - Adafruit libraries for SH1106 -> Adafruit_SH110X & Adafruit_GFX libraries
-// - U8g2 library for SH1106
 
 // OLED display
 #define OLED_DISPLAY_ADDRESS 0x3C // OLED I2C address. Common values are 0x3C and 0x3D
@@ -32,9 +25,6 @@ Adafruit_SH1106G display = Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, 
 #define XPOS 0
 #define YPOS 1
 #define DELTAY 2
-
-// My BME280: 0x76
-// My OLED:   0x3C (SH1106)
 
 /**
  * Print the I2C addresses of connected devices to the Serial Monitor.
@@ -80,14 +70,14 @@ void initOledDisplay() {
 /**
  * Display current SSID and IP address on the OLED display.
  */
-void displayWiFiInfo() {
+void displayWiFiInfo(bool connected, String ssid, String ipAddress) {
   display.clearDisplay();
 
   display.setTextSize(1);      // Normal 1:1 pixel scale
   display.setTextColor(SH110X_WHITE); // Draw white text
   display.setCursor(0, 0);     // Start at top-left corner
 
-  if (WiFi.status() != WL_CONNECTED) {
+  if (!connected) {
     display.println("WiFi Info:");
     display.println("----------");
     display.println("Connecting...");
@@ -95,18 +85,22 @@ void displayWiFiInfo() {
     display.println("WiFi Info:");
     display.println("----------");
     display.print("SSID: ");
-    display.println(WiFi.SSID());
+    display.println(ssid);
     display.print("IP: ");
-    display.println(WiFi.localIP().toString().c_str());
+    display.println(ipAddress);
   }
 
   display.display();
 }
 
+void displayWiFiInfo() {
+  displayWiFiInfo(false, "", "");
+}
+
 /**
  * Display current time on the OLED display.
  */
-void displayTime() {
+void displayTime(String currentTime) {
   display.clearDisplay();
 
   display.setTextSize(1);      // Normal 1:1 pixel scale
@@ -115,15 +109,15 @@ void displayTime() {
 
   display.println("Current Time:");
   display.println("-------------");
-  display.println(getLocalTimeString());
+  display.println(currentTime);
 
   display.display();
 }
 
 /**
- * Display BME280 sensor values on the OLED display.
+ * Display BME280 sensor readings on the OLED display.
  */
-void displaySensorValues(Adafruit_BME280 &bme) {
+void displaySensorValues(float temperature, float humidity, float pressure, float altitude) {
   display.clearDisplay();
 
   display.setTextSize(1);      // Normal 1:1 pixel scale
@@ -133,25 +127,12 @@ void displaySensorValues(Adafruit_BME280 &bme) {
   display.println("Sensor Values:");
   display.println("--------------");
 
-  display.print("Temp: ");
-  display.print(bme.readTemperature());
-  display.print(' ');
-  display.print((char)247); // degree symbol 
-  display.println('C');
-
-  display.print("Pres: ");
-  display.print(bme.readPressure() / 100.0F);
-  display.println(" hPa");
-
-  display.print("Hum:  ");
-  display.print(bme.readHumidity());
-  display.println(" %");
-
-  display.print("Alt:  ");
-  display.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
-  display.println(" m");
+  display.printf("Temp: %.2f %c\n", temperature, (char)247);
+  display.printf("Pres: %.2f hPa\n", pressure);
+  display.printf("Hum:  %.2f %%\n", humidity);
+  display.printf("Alt:  %.2f m\n", altitude);
 
   display.display();
 }
 
-#endif  // _MY_OLED_DISPLAY_H_
+#endif  // _MY_OLED_DISPLAY_H__

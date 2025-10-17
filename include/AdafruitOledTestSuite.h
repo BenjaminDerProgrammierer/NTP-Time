@@ -1,10 +1,9 @@
+#ifndef _ADAFRUIT_OLED_TEST_SUITE_H
+#define _ADAFRUIT_OLED_TEST_SUITE_H
 #include <Arduino.h>
 #include <Adafruit_SH110X.h>
 #include <Adafruit_GFX.h>
 #include "MyOledDisplay.h"
-
-#ifndef _ADAFRUIT_OLED_TEST_SUITE_H
-#define _ADAFRUIT_OLED_TEST_SUITE_H
 #include "MyLogos.h"
 
 void testdrawline();
@@ -22,7 +21,10 @@ void testdrawbitmap(void);
 void testanimate(const uint8_t *bitmap, uint8_t w, uint8_t h);
 void runAdafruitTestSuite();
 
-
+/**
+ * Run the Adafruit OLED Test Suite on the global `display` object.
+ * You need to have initialized the display before calling this function.
+ */
 void runAdafruitTestSuite() {
   // draw a single pixel
   display.drawPixel(10, 10, SH110X_WHITE);
@@ -338,27 +340,4 @@ void testanimate(const uint8_t *bitmap, uint8_t w, uint8_t h) {
   }
 }
 
-// /**
-//  * OLED Display Example
-//  * Benjamin Hartmann | 10/2025
-//  * 
-//  * This example demonstrates the use of
-//  * an SH1106 OLED display with the Adafruit SH110X library.
-//  * It includes a test suite that draws
-//  * various shapes, text, and animations on the display.
-//  */
-//
-// #include <Arduino.h>
-//
-// #include "MyOledDisplay.h"
-//
-// void setup() {
-//   // put your setup code here, to run once:
-//   Serial.begin(115200);
-//
-//   initOledDisplay();
-//   runAdafruitTestSuite();
-// }
-//
-// void loop() {}
 #endif // _ADAFRUIT_OLED_TEST_SUITE_H

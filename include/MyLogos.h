@@ -1,9 +1,14 @@
-#include <Arduino.h>
+/**
+ * MyLogos.h
+ * Custom monochrome bitmap logos for OLED display
+ * Draw your own logos with https://www.espboards.dev/tools/monochrome-bitmap-tool/ or https://javl.github.io/image2cpp/
+ * Benjamin Hartmann | 10/2025
+ */
 
 #ifndef _MY_LOGOS_H_
 #define _MY_LOGOS_H_
 
-// Draw your own logos with https://www.espboards.dev/tools/monochrome-bitmap-tool/ or https://javl.github.io/image2cpp/
+#include <Arduino.h>
 
 // Adafruit Logo, 16x16px
 #define ADAFRUIT_LOGO_HEIGHT 16

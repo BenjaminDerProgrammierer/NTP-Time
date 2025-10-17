@@ -3,11 +3,11 @@
  * Benjamin Hartmann | 10/2025
  */
 
-#include <Arduino.h>
-#include <time.h>
-
 #ifndef _MY_TIME_H_
 #define _MY_TIME_H_
+
+#include <Arduino.h>
+#include <time.h>
 
 #define MY_TIMEZONE "CET-1CEST,M3.5.0,M10.5.0/3"  // Europe/Vienna
 

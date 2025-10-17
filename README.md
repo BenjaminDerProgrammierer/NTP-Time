@@ -29,3 +29,19 @@ Additionally you will need a Breadboard and some jumper wires.
 | VCC        | 3V3         |
 | SCL        | D1          |
 | SDA        | D2          |
+
+## Secrets
+
+You'll need to create a `MqttCredentials.h` and `WiFiCredentials.h` file in the `include` folder with the following content:
+
+```cpp
+// MqttCredentials.h
+#define MY_MQTT_BROKER "test.mosquitto.org"
+#define MY_MQTT_PORT 1883
+#define MY_MQTT_USERNAME ""
+#define MY_MQTT_PASSWORD ""
+
+// WiFiCredentials.h
+#define MY_SSID "ssid"
+#define MY_PASSWORD "password"
+```
