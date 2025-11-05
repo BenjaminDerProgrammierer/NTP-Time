@@ -1,5 +1,7 @@
 # ESP8266 with NTP Time Sync and OLED Display
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/BenjaminDerProgrammierer/NTP-Time)
+
 ## Parts required
 
 | Part | Description | aprox. cost |
